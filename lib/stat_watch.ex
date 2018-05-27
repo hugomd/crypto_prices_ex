@@ -16,7 +16,7 @@ defmodule StatWatch do
   def fetch_stats() do
     now = DateTime.to_string(%{DateTime.utc_now | microsecond: {0, 0}})
 
-    %{body: body} = HTTPoison.get! stats_url()
+    %{body: body} = HTTPoison.get! Application.get_env(:stat_watch, :stats_url)
 
     %{BTC: %{USD: btc_in_usd}, ETH: %{USD: eth_in_usd}} = Poison.decode! body, keys: :atoms
 
@@ -42,10 +42,5 @@ defmodule StatWatch do
     end
 
     File.write!(filename, row <> "\n", [:append])
-  end
-
-  @doc false
-  def stats_url do
-    "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD"
   end
 end
