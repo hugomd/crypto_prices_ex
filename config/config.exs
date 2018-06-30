@@ -2,6 +2,13 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :stat_watch, StatWatch.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "stat_watch",
+  username: "hugo",
+  password: "",
+  hostname: "localhost"
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
@@ -30,4 +37,5 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :stat_watch,
+  ecto_repos: [StatWatch.Repo],
   stats_url: "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD"

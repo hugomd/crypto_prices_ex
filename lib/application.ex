@@ -5,6 +5,7 @@ defmodule StatWatch.Application do
     import Supervisor.Spec, warn: true
 
     children = [
+      StatWatch.Repo,
       worker(StatWatch.Scheduler, [])
     ]
 
